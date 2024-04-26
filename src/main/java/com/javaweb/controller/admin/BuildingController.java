@@ -4,16 +4,15 @@ package com.javaweb.controller.admin;
 
 import com.javaweb.constant.SystemConstant;
 import com.javaweb.converter.BuildingDTOConverter;
-import com.javaweb.enums.buildingType;
-import com.javaweb.enums.districtCode;
+import com.javaweb.enums.BuildingType;
+import com.javaweb.enums.DistrictCode;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.request.BuildingSearchRequest;
 import com.javaweb.model.response.BuildingSearchResponse;
+import com.javaweb.security.utils.SecurityUtils;
 import com.javaweb.service.BuildingService;
 import com.javaweb.service.IUserService;
-import com.javaweb.service.impl.BuildingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,7 +38,10 @@ public class  BuildingController {
                                      @RequestParam (name="typeCode", required = false) List<String> typeCode,
                                      @ModelAttribute(SystemConstant.MODEL) BuildingDTO model
                                      ,HttpServletRequest request){
-
+        if(SecurityUtils.getAuthorities().contains("ROLE_STAFF")){
+            Long staffId = SecurityUtils.getPrincipal().getId();
+            conditions.put("staffId", staffId);
+        }
         List<BuildingDTO> buildingDTOS = buildingService.findAll(conditions, typeCode);
         List < BuildingSearchResponse> responseList = new ArrayList<>();
         for (BuildingDTO b : buildingDTOS){
@@ -51,8 +53,8 @@ public class  BuildingController {
         mav.addObject("modelSearch", buildingSearchRequest);
         mav.addObject("buildingList", responseList);
         mav.addObject("staffs", userService.getStaffs());
-        mav.addObject("districts", districtCode.type());
-        mav.addObject("typeCodes", buildingType.type());
+        mav.addObject("districts", DistrictCode.type());
+        mav.addObject("typeCodes", BuildingType.type());
         return mav;
     }
     @GetMapping(value = "/admin/building-edit")
@@ -60,8 +62,8 @@ public class  BuildingController {
         ModelAndView mav = new ModelAndView("admin/building/edit");
 
         mav.addObject("buildingEdit", buildingDTO);
-        mav.addObject("districts", districtCode.type());
-        mav.addObject("typeCodes", buildingType.type());
+        mav.addObject("districts", DistrictCode.type());
+        mav.addObject("typeCodes", BuildingType.type());
         return mav;
     }
     @GetMapping(value = "/admin/building-edit-{id}")
@@ -69,8 +71,8 @@ public class  BuildingController {
         ModelAndView mav = new ModelAndView("admin/building/edit");
         BuildingDTO buildingDTO = buildingService.findBuildingById(id);
         mav.addObject("buildingEdit", buildingDTO);
-        mav.addObject("districts", districtCode.type());
-        mav.addObject("typeCodes", buildingType.type());
+        mav.addObject("districts", DistrictCode.type());
+        mav.addObject("typeCodes", BuildingType.type());
         return mav;
     }
 

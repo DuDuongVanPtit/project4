@@ -3,6 +3,8 @@ package com.javaweb.security;
 import com.javaweb.constant.SystemConstant;
 import com.javaweb.security.utils.SecurityUtils;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -31,17 +33,12 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     public String determineTargetUrl(Authentication authentication) {
         String url = "";
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         List<String> roles = SecurityUtils.getAuthorities();
-//        if (isUser(roles)) {
-//            url = SystemConstant.HOME;
-//        } else if (isAdmin(roles)) {
-//            url = SystemConstant.ADMIN_HOME;
-//        }
-//        return url;
-        if (isUser(roles)) {
-            url = SystemConstant.HOME;
-        } else if (isAdmin(roles)) {
+        if (isStaff(roles) || isAdmin(roles)){
             url = SystemConstant.ADMIN_HOME;
+        } else {
+            url = SystemConstant.HOME;
         }
         return url;
     }
@@ -61,8 +58,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         return false;
     }
 
-    private boolean isUser(List<String> roles) {
-        if (roles.contains(SystemConstant.USER_ROLE)) {
+    private boolean isStaff(List<String> roles) {
+        if (roles.contains(SystemConstant.STAFF_ROLE)) {
             return true;
         }
         return false;

@@ -1,14 +1,12 @@
 package com.javaweb.api.admin;
 
-import com.javaweb.model.dto.AssignmentBuildingDTO;
+import com.javaweb.model.dto.AssignmentDTO;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class BuildingAPI {
         return responseDTO;
     }
     @PostMapping("/assignment")
-    public ResponseDTO updateAssignmentBuilding(@RequestBody AssignmentBuildingDTO assignmentBuildingDTO){
+    public ResponseDTO updateAssignmentBuilding(@RequestBody AssignmentDTO assignmentBuildingDTO){
         ResponseDTO responseDTO = buildingService.updateAssignmentTable(assignmentBuildingDTO);
         return responseDTO;
     }

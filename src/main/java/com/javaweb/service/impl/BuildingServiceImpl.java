@@ -4,9 +4,8 @@ import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.converter.BuildingDTOConverter;
 import com.javaweb.converter.BuildingSearchBuilderConverter;
 import com.javaweb.entity.BuildingEntity;
-import com.javaweb.entity.RentAreaEntity;
 import com.javaweb.entity.UserEntity;
-import com.javaweb.model.dto.AssignmentBuildingDTO;
+import com.javaweb.model.dto.AssignmentDTO;
 import com.javaweb.model.dto.BuildingDTO;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.model.response.StaffResponseDTO;
@@ -98,9 +97,9 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public ResponseDTO updateAssignmentTable(AssignmentBuildingDTO assignmentBuildingDTO) {
+    public ResponseDTO updateAssignmentTable(AssignmentDTO assignmentBuildingDTO) {
         List<Long> staffIds = assignmentBuildingDTO.getStaffs();
-        BuildingEntity buildingEntity = buildingRepository.findById(assignmentBuildingDTO.getBuildingId()).get();
+        BuildingEntity buildingEntity = buildingRepository.findById(assignmentBuildingDTO.getId()).get();
         List<UserEntity> userEntities = new ArrayList<>();
         for(Long id : staffIds){
             userEntities.add(userRepository.findById(id).get());

@@ -42,4 +42,7 @@ public class UserEntity extends BaseEntity {
 
     @ManyToMany(mappedBy = "userEntities", fetch = FetchType.LAZY)
     List<BuildingEntity> buildingEntityList = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "userEntities",fetch = FetchType.LAZY)
+    List<CustomerEntity> customerEntityList = new ArrayList<>();
 }

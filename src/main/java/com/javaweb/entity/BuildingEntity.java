@@ -54,7 +54,7 @@ public class BuildingEntity extends BaseEntity {
     private String rentTime;
     @Column(name = "decorationtime")
     private String decorationTime;
-    @Column(name = "brokeragetee")
+    @Column(name = "brokeragefee")
     private Integer brokerageFee;
     @Column(name = "type")
     private String typeCode;

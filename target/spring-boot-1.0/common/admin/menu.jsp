@@ -55,24 +55,26 @@
             </ul>
         </li>
     </ul>
-    <ul class="nav nav-list">
-        <li class="">
-            <a href="#" class="dropdown-toggle" style="padding: 10px">
-                <i class="fa-solid fa-user" style="font-size: 18px"></i>
-                <span class="menu-text">Quản Lý Tài Khoản</span>
-            </a>
-            <b class="arrow"></b>
-            <ul class="submenu">
-                <li class="">
-                    <a href='/admin/user-list'>
-                        <i class="fa-solid fa-users"></i>
-                        Danh sách tài khoản
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    <security:authorize access="hasRole('MANAGER')">
+        <ul class="nav nav-list">
+            <li class="">
+                <a href="#" class="dropdown-toggle" style="padding: 10px">
+                    <i class="fa-solid fa-user" style="font-size: 18px"></i>
+                    <span class="menu-text">Quản Lý Tài Khoản</span>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
+                    <li class="">
+                        <a href='/admin/user-list'>
+                            <i class="fa-solid fa-users"></i>
+                            Danh sách tài khoản
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </security:authorize>
     <ul class="nav nav-list">
         <li class="">
             <a href="#" class="dropdown-toggle" style="padding: 10px">
@@ -82,7 +84,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="">
-                    <a href='/admin/user-list'>
+                    <a href='/admin/customer-list'>
                         <i class="fa-solid fa-people-group"></i>
                         Danh sách khách hàng
                     </a>

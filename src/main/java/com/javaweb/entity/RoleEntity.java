@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Table(name = "role")
 public class RoleEntity extends BaseEntity {
-
     private static final long serialVersionUID = -6525302831793188081L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

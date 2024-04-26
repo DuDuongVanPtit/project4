@@ -1,6 +1,20 @@
 body{
     font-family: sans-serif;
 }
+input:focus {
+    outline: none; /* Loại bỏ viền khi thẻ input được focus */
+}
+input::placeholder {
+    color: #e16767; !important
+}
+.no-select {
+    -webkit-touch-callout: none; /* Safari */
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -khtml-user-select: none; /* Konqueror 4.0+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
 .building-search-text, .building-search-number, .building-search-select{
     width: 100%;
     height: auto;
@@ -40,12 +54,15 @@ body{
 }
 .submit-btn{
     margin-top: 10px;
-    background-color: rgb(166, 54, 54);
+    background-color: #5cbf74;
     color: white;
-    border: 1px solid #333;
+    border: none;
     border-radius: 2px;
     width: 100px;
     height: 40px;
+}
+.submit-btn:hover{
+    background-color: #448f5a;
 }
 .custom-alert-backdrop {
     display: none;
@@ -117,8 +134,15 @@ body{
 }
 .input-error{
     font-size: 15px;
-    font-weight: 600;
     padding: 10px;
     color: #da1a1a;
 }
+.delete-btn{
+    background-color: red;
+    color: #ece4e4;
+}
+.delete-btn:hover{
+    background-color: #a12929;
+}
+
 

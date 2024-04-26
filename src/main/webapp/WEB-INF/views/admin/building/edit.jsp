@@ -244,7 +244,6 @@
             <span id="customAlertMessage" class="custom-alert-message"></span>
             <button id="customAlertButton" class="custom-alert-button">OK</button>
         </div>
-
         <script>
             $(document).ready(function(){
                 const urlParams = new URLSearchParams(window.location.search);
@@ -255,7 +254,7 @@
                     var formData = $('#form-edit').serializeArray();
                     $.each(formData, function(i, v){
                         if(v.name != "typeCode"){
-                            data["" + v.name + ""] = v.value;
+                            data["" + v.name + ""] = v.value.trim();
                         }
                         else{
                             typeCode.push(v.value);

@@ -44,7 +44,7 @@
                         <div class="widget-body" bis_skin_checked="1" style="display: block;">
                             <div class="widget-main" bis_skin_checked="1">
                                 <%--the form cua spring framework--%>
-                                <form:form id="listForm" modelAttribute="modelSearch" action="${buildingListURL}" method="GET">
+                                <form:form id="listForm" modelAttribute="modelSearch"  action="${buildingListURL}" method="GET">
                                     <div class="building-search-text">
                                         <div class="input-container">
                                             <label>Tên tòa nhà</label><br>
@@ -121,43 +121,49 @@
                                                 <form:options items="${districts}"></form:options>
                                             </form:select><br>
                                         </div>
-                                        <div class="select-container">
-                                            <form:select name="typeCode" path="staffId">
-                                                <form:option value="">---Chọn nhân viên---</form:option>
-                                                <form:options items="${staffs}"/>
-                                            </form:select>
-                                        </div>
+                                        <security:authorize access="hasRole('MANAGER')">
+                                            <div class="select-container">
+                                                <form:select path="staffId">
+                                                    <form:option value="">---Chọn nhân viên---</form:option>
+                                                    <form:options items="${staffs}"/>
+                                                </form:select>
+                                            </div>
+                                        </security:authorize>
                                     </div>
 
                                     <div class="building-search-check">
                                         <form:checkboxes path="typeCode" items="${typeCodes}"/>
                                     </div>
 
-                                    <button class="submit-btn" type="button" id="btnSearchBuilding">
-                                        <i class="fa-solid fa-magnifying-glass" style="color: #fff;"></i>
-                                        Tìm Kiếm
-                                    </button>
+                                    <div style="width: fit-content; margin: 0 auto">
+                                        <button class="submit-btn no-select" type="button" id="btnSearchBuilding">
+                                            <i class="fa-solid fa-magnifying-glass" style="color: #fff;"></i>
+                                            Tìm Kiếm
+                                        </button>
+                                    </div>
+
                                 </form:form>
                             </div>
                         </div>
-
-                        <div class="pull-right" style="margin-bottom: 2rem;">
-                            <a href="/admin/building-edit">
-                                <button class="btn btn-info" style=" border-radius: 2px;" title="thêm tòa nhà">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-add" viewBox="0 0 16 16">
-                                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
+                        <div class="pull-left" style="margin-top: 2rem; margin-bottom: 1rem;">
+                            <security:authorize access="hasRole('MANAGER')">
+                                <button class="btn btn-danger" title="xóa tòa nhà" id="deleteBuildingsBtn" disabled>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-dash" viewBox="0 0 16 16">
+                                        <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1"/>
                                         <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
                                         <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
                                     </svg>
                                 </button>
-                            </a>
-                            <button class="btn btn-danger" style=" border-radius: 2px;" title="xóa tòa nhà" id="deleteBuildingsBtn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-dash" viewBox="0 0 16 16">
-                                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1"/>
-                                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
-                                    <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-                                </svg>
-                            </button>
+                                <a href="/admin/building-edit">
+                                    <button class="btn btn-info" title="thêm tòa nhà">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-add" viewBox="0 0 16 16">
+                                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0"/>
+                                            <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
+                                            <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                                        </svg>
+                                    </button>
+                                </a>
+                            </security:authorize>
                         </div>
                     </div>
                 </div>
@@ -167,17 +173,17 @@
                         <display:table name="buildingList" requestURI="${buildingListURL}" id="tableList" pagesize="${model.maxPageItems}"
                                        class="table table-striped table-bordered table-hover"
                                        style="text-align: center;">
-                            <display:column title="<fieldset class='form-group'>
+                            <display:column title="<fieldset class='form-group' style='display: block; margin: 0'>
                                                         <input type='checkbox' id='checkAll' class='check-box-element'>
 												   </fieldset>" class="center select-cell"
-                                            headerClass="center select-cell">
-                                <fieldset>
+                                            headerClass="center select-cell no-select">
+                                <fieldset class="no-select">
                                     <input type="checkbox" name="checkList" value="${tableList.id}"
                                            id="checkbox_${tableList.id}" class="check-box-element"/>
                                 </fieldset>
                             </display:column>
 
-                            <display:column property="name" title="Tên tòa nhà" headerClass="center"/>
+                            <display:column property="name" title="Tên tòa nhà"  headerClass="center"/>
                             <display:column property="address" title="Địa chỉ" headerClass="center"/>
                             <display:column property="numberOfBasement" title="Số tầng hầm" headerClass="center"/>
                             <display:column property="managerName" title="Tên quản lý" headerClass="center"/>
@@ -188,17 +194,19 @@
                             <display:column property="brokerageFee" title="Phí môi giới" headerClass="center"/>
                             <display:column title="Thao tác" headerClass="center">
                                 <div class="hidden-sm hidden-xs btn-group">
-                                    <button class="btn btn-xs btn-success" title="Giao tòa nhà" onclick="assignmentBuilding(${tableList.id})" name="buildingid">
-                                        <i class="ace-icon glyphicon glyphicon-list"></i>
-                                    </button>
-
+                                    <security:authorize access="hasRole('MANAGER')">
+                                        <button class="btn btn-xs btn-success" title="Giao tòa nhà" onclick="assignmentBuilding(${tableList.id})" name="buildingid">
+                                            <i class="ace-icon glyphicon glyphicon-list"></i>
+                                        </button>
+                                    </security:authorize>
                                     <a class="btn btn-xs btn-info" title="Sửa tòa nhà" href="/admin/building-edit-${tableList.id}">
                                         <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                                     </a>
-
-                                    <button class="btn btn-xs btn-danger" title="Xóa tòa nhà" onclick="deleteBuilding(${tableList.id})">
-                                        <i class="ace-icon glyphicon glyphicon-trash"></i>
-                                    </button>
+                                    <security:authorize access="hasRole('MANAGER')">
+                                        <button class="btn btn-xs btn-danger" title="Xóa tòa nhà" onclick="deleteBuilding(${tableList.id})">
+                                            <i class="ace-icon glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </security:authorize>
                                 </div>
 
                                 <div class="hidden-md hidden-lg">
@@ -273,13 +281,14 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" role="dialog" id="deleteBuildingModal">
+
+    <div class="modal fade" role="dialog" id="deleteConfirmModal">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content" style="padding: 15px">
                 <h1>Bạn có chắc chắn muốn xóa tòa nhà</h1>
                 <div class="modal-footer">
-                    <button type="button" class="my-button-apply" id="btnDeleteBuilding">Xóa</button>
+                    <button type="button" class="my-button-apply" id="deleteBtn">Xóa</button>
                     <button type="button" class="my-button-cancel" data-dismiss="modal">Hủy</button>
                 </div>
             </div>
@@ -321,31 +330,10 @@
                 }
             });
         }
-
-        function customAlert(message, callback) {
-            var alertBackdrop = document.getElementById('customAlertBackdrop');
-            var alertBox = document.getElementById('customAlert');
-            var alertMessage = document.getElementById('customAlertMessage');
-            var alertButton = document.getElementById('customAlertButton');
-
-            alertMessage.textContent = message;
-
-            alertButton.onclick = function() {
-                alertBox.style.display = 'none';
-                alertBackdrop.style.display = 'none';
-                if (callback && typeof callback === 'function') {
-                    callback();
-                }
-            };
-
-            alertBox.style.display = 'block';
-            alertBackdrop.style.display = 'block';
-        }
-
         $('#btnAssignmentBuilding').click(function(e){
             e.preventDefault();
             var data = {};
-            data["buildingId"] = $('#buildingId').val();
+            data["id"] = $('#buildingId').val();
             var staffs = $("#staffList").find('tbody input[type = checkbox]:checked').map(function(){
                 return $(this).val();
             }).get();
@@ -374,17 +362,41 @@
             });
         }
 
+        function customAlert(message, callback) {
+            var alertBackdrop = document.getElementById('customAlertBackdrop');
+            var alertBox = document.getElementById('customAlert');
+            var alertMessage = document.getElementById('customAlertMessage');
+            var alertButton = document.getElementById('customAlertButton');
+
+            alertMessage.textContent = message;
+
+            alertButton.onclick = function() {
+                alertBox.style.display = 'none';
+                alertBackdrop.style.display = 'none';
+                if (callback && typeof callback === 'function') {
+                    callback();
+                }
+            };
+
+            alertBox.style.display = 'block';
+            alertBackdrop.style.display = 'block';
+        }
+
+
         $('#btnSearchBuilding').click(function(e){
             e.preventDefault();
             $('#listForm').submit();
         })
 
+        $('#tableList').on('change', 'input[type="checkbox"]', function() {
+            var anyChecked = $('#tableList tbody tr td fieldset input[type="checkbox"]:checked').length > 0;
+            $('#deleteBuildingsBtn').prop('disabled', !anyChecked);
+        });
         function deleteBuilding(data){
             var buildingId = [data];
-            $('#deleteBuildingModal').modal('show'); // Hiển thị modal
-
+            $('#deleteConfirmModal').modal('show'); // Hiển thị modal
             // Gán sự kiện cho nút xác nhận trong modal
-            $('#btnDeleteBuilding').click(function() {
+            $('#deleteBtn').click(function() {
                 // Gọi hàm deleteBuildings khi người dùng nhấn nút xác nhận
                 deleteBuildings(buildingId);
             });
@@ -394,7 +406,10 @@
             var buildingIds = $('#tableList').find('tbody input[type = checkbox]:checked').map(function (){
                 return $(this).val();
             }).get();
-            deleteBuildings(buildingIds);
+            $('#deleteConfirmModal').modal('show');
+            $('#deleteBtn').click(function() {
+                deleteBuildings(buildingIds);
+            });
         })
         function deleteBuildings(data){
             $.ajax({

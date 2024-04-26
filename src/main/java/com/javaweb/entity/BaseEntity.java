@@ -33,9 +33,9 @@ public class BaseEntity implements Serializable {
 
     @Column(name = "modifieddate")
     @LastModifiedDate
-    private Date modifiedDate;
+    private Date modifiedDate = null;
 
     @Column(name = "modifiedby")
     @LastModifiedBy
-    private String modifiedBy;
+    private String modifiedBy = null;
 }

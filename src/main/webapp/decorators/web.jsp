@@ -11,10 +11,13 @@
 		<title>Trang chủ</title>
 
 			<!-- Bootstrap core CSS -->
-			<link href="web/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="web/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-			<!-- Custom styles for this template -->
-			<link href="web/css/small-business.css" rel="stylesheet" type="text/css">
+		<!-- Custom styles for this template -->
+		<link href="web/css/small-business.css" rel="stylesheet" type="text/css">
+
+		<link rel="stylesheet" href="web/css/web-style.css" type="text/css">
+
 	</head>
 	<body>
 		<!-- Navigation -->
