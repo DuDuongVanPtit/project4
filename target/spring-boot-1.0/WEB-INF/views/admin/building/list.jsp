@@ -191,6 +191,7 @@
                             <display:column property="floorArea" title="Diện tích sàn" headerClass="center"/>
                             <display:column property="emptyArea" title="Diện tích trống" headerClass="center"/>
                             <display:column property="rentArea" title="Diện tích thuê" headerClass="center"/>
+                            <display:column property="rentPrice" title="Giá thuê" headerClass="center"/>
                             <display:column property="brokerageFee" title="Phí môi giới" headerClass="center"/>
                             <display:column title="Thao tác" headerClass="center">
                                 <div class="hidden-sm hidden-xs btn-group">

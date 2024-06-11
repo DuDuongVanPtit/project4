@@ -104,19 +104,4 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
         return sql;
     }
 
-//    public List<BuildingEntity> getAllBuildings(Pageable pageable) {
-//
-//        StringBuilder sql = new StringBuilder(buildQueryFilter())
-//                .append(" LIMIT ").append(pageable.getPageSize()).append("\n")
-//                .append(" OFFSET ").append(pageable.getOffset());
-//        System.out.println("Final query: " + sql.toString());
-//
-//        Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
-//        return query.getResultList();
-//    }
-//    public int countTotalItem() {
-//        String sql = buildQueryFilter();
-//        Query query = entityManager.createNativeQuery(sql.toString());
-//        return query.getResultList().size();
-//    }
 }

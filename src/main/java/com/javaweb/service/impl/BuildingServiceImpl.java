@@ -7,6 +7,7 @@ import com.javaweb.entity.BuildingEntity;
 import com.javaweb.entity.UserEntity;
 import com.javaweb.model.dto.AssignmentDTO;
 import com.javaweb.model.dto.BuildingDTO;
+import com.javaweb.model.response.BuildingSearchResponse;
 import com.javaweb.model.response.ResponseDTO;
 import com.javaweb.model.response.StaffResponseDTO;
 import com.javaweb.repository.BuildingRepository;
@@ -33,12 +34,12 @@ public class BuildingServiceImpl implements BuildingService {
     private UserRepository userRepository;
 
     @Override
-    public List<BuildingDTO> findAll(Map<String, Object> params, List<String> typeCode){
+    public List <BuildingSearchResponse> findAll(Map<String, Object> params, List<String> typeCode){
         BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(params, typeCode);
         List < BuildingEntity> buildingEntities = buildingRepository.findAll(buildingSearchBuilder);
-        List<BuildingDTO> result = new ArrayList<>();
+        List<BuildingSearchResponse> result = new ArrayList<>();
         for(BuildingEntity b : buildingEntities){
-            result.add(buildingDTOConverter.toBuildingDTO(b));
+            result.add(buildingDTOConverter.toBuildingRespone(b));
         }
         return result;
     }

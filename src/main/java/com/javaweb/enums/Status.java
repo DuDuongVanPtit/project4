@@ -4,9 +4,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public enum Status {
-    DXL ("Đang xử lý"),
-    XLX(" Đã xử lý"),
-    CXL("Chưa xử lý");
+    DAG_XU_LY("Đang xử lý"),
+    DA_XU_LY("Đã xử lý"),
+    CHUA_XU_LY("Chưa xử lý");
 
     private final String statusName;
     Status(String statusName) {

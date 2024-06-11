@@ -34,6 +34,16 @@ public class BuildingDTOConverter {
         }
         return building;
     }
+    public BuildingSearchResponse toBuildingRespone(BuildingEntity item){
+        BuildingSearchResponse building = modelMapper.map(item, BuildingSearchResponse.class);
+        building.setAddress(item.getStreet() + ", " + item.getWard() + ", " + item.getDistrict());
+        List<RentAreaEntity> rentAreas = item.getRentAreaEntities();
+        if(rentAreas != null){
+            String rentArea = rentAreas.stream().map(it->it.getValue().toString()).collect(Collectors.joining(", "));
+            building.setRentArea(rentArea);
+        }
+        return building;
+    }
     public BuildingEntity toBuildingEntity(BuildingDTO buildingDTO){
         BuildingEntity buildingEntity = modelMapper.map(buildingDTO, BuildingEntity.class);
         String type = buildingDTO.getTypeCode().stream().map(it->it.toString()).collect(Collectors.joining(","));

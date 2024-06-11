@@ -42,11 +42,7 @@ public class  BuildingController {
             Long staffId = SecurityUtils.getPrincipal().getId();
             conditions.put("staffId", staffId);
         }
-        List<BuildingDTO> buildingDTOS = buildingService.findAll(conditions, typeCode);
-        List < BuildingSearchResponse> responseList = new ArrayList<>();
-        for (BuildingDTO b : buildingDTOS){
-            responseList.add(buildingDTOConverter.toBuildingSearchResponse(b));
-        }
+        List<BuildingSearchResponse> responseList = buildingService.findAll(conditions, typeCode);
         model.setMaxPageItems(5);
         model.setTotalItem(responseList.size());
         ModelAndView mav = new ModelAndView("admin/building/list");

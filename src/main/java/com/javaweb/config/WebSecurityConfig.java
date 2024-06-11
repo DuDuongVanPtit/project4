@@ -17,12 +17,11 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //tim kiem user thong qua userName va status
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailService();
     }
-    //ma hoa mat khau
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -48,10 +47,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                         .antMatchers
                                 (
-                                        "/admin/building-edit", "/admin/user-edit/**", "/admin/user-list"
+                                        "/admin/building-edit/**", "/admin/user-edit/**", "/admin/user-list","/admin/customer-edit/**"
                                 )
                         .hasRole("MANAGER")
-
                         .antMatchers("/admin/**").hasAnyRole("MANAGER","STAFF")
                         .antMatchers("/login", "/resource/**", "/trang-chu", "/api/**").permitAll()
                         .and()

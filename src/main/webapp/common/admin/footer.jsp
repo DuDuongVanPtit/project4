@@ -6,7 +6,7 @@
 	<div class="footer-inner">
 		<div class="footer-content">
 						<span class="bigger-120">
-							<b>DUDUONGVAN.com</b>
+							<b>DEVNGUYEN.com</b>
 						</span>
 		</div>
 	</div>
